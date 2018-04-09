@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Login</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <h2>Bem Vindo ao meu App!</h2>
+    <p>
+      Esse app ainda esta em desenvolvimento......versao 1.0.1<br>
+      Esse app Esta sendo desenvolvido por ,
+      <Strong>Felipe Costa araujo</Strong>.....
+    </p>
+    
+    <ion-list>
+      <ion-item>
+        <ion-label floating>E-Mail</ion-label>
+        <ion-input type="email" [(ngModel)]="loginData.email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Senha</ion-label>
+        <ion-input type="password" [(ngModel)]="loginData.password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button full ion-button (click)="login()" [disabled]="!loginData.email || !loginData.password">Login</button>
+    <button full ion-button (click)="loginFacebook()">Login com Facebook</button>
+    <a href="#" (click)="signup()">Inscreva-se</a>
+
+
+    <br>
+    <button ion-button small (click)="irHome()">Ir Para home</button>
+  
+    <p>{{face.name}}</p>
+    <p style="text-align: center">
+        {{ loginData.email }}
+      </p>
+    <img src="{{face.profilePicture}}" />
+    <p>Ultimo login :{{face.lastSignInTime}}</p>
+    
+  
+  
+  </ion-content>
+  
+  
+  
+  <!--
+  <button ion-button block (click)="facebookLogin()" >Login </button>
+    <ion-card >
+      <img src="{{loginData.profilePicture}}" />
+      <ion-card-content>
+        <ion-card-title>
+          {{ face.name }}
+        </ion-card-title>
+        <p style="text-align: center">
+          {{ loginData.email }}
+        </p>
+        
+      </ion-card-content>
+    </ion-card>
+    <button ion-button block (click)="logout()" >Logout Facebook</button>
+    <p >Ultimo login :{{face.lastSignInTime}}
+    </p>
+  -->

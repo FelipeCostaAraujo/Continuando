@@ -1,0 +1,30 @@
+page-feed {
+    h2.feed_title {
+        font-weight:  bold;
+        color: red;
+    }
+    p.feed_mensagem {
+        color: grey;
+        font-weight:  bold;
+    }
+    p.feed_date {
+        color: black;
+        font-weight: bold;
+    }
+    ion-note.feed_horas.note.note-ios {
+        color:  black;
+        font-weight:  bold;
+    }
+    .feed_comentarios {
+        font-weight:  bold;
+    }
+    
+    .feed_curtir {
+        font-weight:  bold;
+    }
+    p.feed_Idioma {
+        font-weight: bold;
+        font-size:  15px;
+    }
+    
+}

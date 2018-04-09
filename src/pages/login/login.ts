@@ -3,20 +3,21 @@ import { NavController, ToastController, Platform } from 'ionic-angular';
 import firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Facebook } from '@ionic-native/facebook';
+import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
 
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-login',
+  templateUrl: 'login.html'
 })
-export class HomePage {
+export class LoginPage {
   
   PegaDados = new Array<any>();
-  FaceLogin = false;
+
 
   face = {
-    
+    FaceLogin: false,
     name: '',
     profilePicture: '',
     email: '',
@@ -35,11 +36,11 @@ export class HomePage {
     private toastCtrl: ToastController
   ) {
 
- 
-
   }
+
+  
   loginFacebook() {
-   
+
     if (this.platform.is('cordova')) {
       
       return this.facebook.login(['email', 'public_profile']).then(res => {
@@ -53,14 +54,12 @@ export class HomePage {
         this.face.profilePicture = objeto_retorno.photoURL;
         this.face.email = objeto_retorno.email;
         this.face.lastSignInTime = objeto_retorno.metadata.lastSignInTime;
-        this.FaceLogin=true;
-        
+        this.irHome();
         })
         
       })
     }
     else {
-      
       return this.fire.auth
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(res => {
@@ -69,10 +68,11 @@ export class HomePage {
           this.face.email = res.user.email;
           this.face.profilePicture = res.user.photoURL;
           this.face.lastSignInTime = res.user.metadata.lastSignInTime;
-          this.FaceLogin=true;
-          
+          this.irHome();
     })
+   
   }
+  
 }
 
 
@@ -95,77 +95,16 @@ export class HomePage {
     this.navCtrl.push(HomePage, { email: this.loginData.email });
   }
 
+  irHome(){
+    this.navCtrl.push(TabsPage);
+  }
+
 
   logout() {
     this.fire.auth.signOut();
-    this.FaceLogin = false;
+    this.face.FaceLogin = false;
   }
-  
-  abrirTabs(){
-    this.navCtrl.push(TabsPage);
-   }
+
+
 
 }
-/*
-let credential = firebase.auth.FacebookAuthProvider.credential(loginResponse.acessToken);
-firebase.auth().signInWithCredential(credential).then((res)=>{
-
-})
-
- let provider = new firebase.auth.FacebookAuthProvider();
-
-     firebase.auth().signInWithRedirect(provider).then(()=> {
-       firebase.auth().getRedirectResult().then((result)=>{
-         alert(JSON.stringify(result));
-       }).catch(function(error){
-         alert(JSON.stringify(error))
-       });
-     })
-
-let provider = new firebase.auth.FacebookAuthProvider();
-
-    firebase.auth().signInWithRedirect(provider).then(()=>{
-      firebase.auth().getRedirectResult().then((res)=>{
-        console.log(res);
-        this.face.FaceLogin = true;
-        this.face.name = res.user.displayName;
-        this.face.email = res.user.email;
-        this.face.profilePicture = res.user.photoURL;
-        this.face.lastSignInTime = res.user.metadata.lastSignInTime;
-      }).catch(function(error){
-        alert(JSON.stringify(error))
-      });
-    })
-
-
-
-
-
-
-
-
-
-this.fire.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-      .then(res => {
-        console.log(res);
-        this.face.FaceLogin = true;
-        this.face.name = res.user.displayName;
-        this.face.email = res.user.email;
-        this.face.profilePicture = res.user.photoURL;
-        this.face.lastSignInTime = res.user.metadata.lastSignInTime;
-
-      })
-
-
-
-       this.fire.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-      .then(res => {
-        console.log(res);
-        this.face.FaceLogin = true;
-        this.face.name = res.user.displayName;
-        this.face.email = res.user.email;
-        this.face.profilePicture = res.user.photoURL;
-        this.face.lastSignInTime = res.user.metadata.lastSignInTime;
-        
-      })
- */

@@ -10,6 +10,36 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HttpModule } from "@angular/http"
+import { FeedPageModule } from '../pages/feed/feed.module';
+import { IntroPageModule } from '../pages/intro/intro.module';
+import { ConfiguracoesPageModule } from '../pages/configuracoes/configuracoes.module';
+import { SobrePageModule } from '../pages/sobre/sobre.module';
+import { PerfilPageModule } from '../pages/perfil/perfil.module';
+import { FilmeDetalhesPageModule } from '../pages/filme-detalhes/filme-detalhes.module';
+import { MenuPageModule } from '../pages/menu/menu.module';
+
+import { Facebook } from '@ionic-native/facebook';
+
+
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { LoginPageModule } from '../pages/login/login.module';
+
+
+
+
+
+var config = {
+  apiKey: "AIzaSyDMMO5Efv2t6N3U2XC7afgb2UZYZgIeYU0",
+  authDomain: "continuandofire.firebaseapp.com",
+  databaseURL: "https://continuandofire.firebaseio.com",
+  projectId: "continuandofire",
+  storageBucket: "continuandofire.appspot.com",
+  messagingSenderId: "35454275956"
+};
+
 
 @NgModule({
   declarations: [
@@ -21,7 +51,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    FeedPageModule,
+    IntroPageModule,
+    HttpModule,
+    ConfiguracoesPageModule,
+    PerfilPageModule,
+    FilmeDetalhesPageModule,
+    MenuPageModule,
+    SobrePageModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(config),
+    LoginPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,7 +75,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Facebook,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    Facebook
+
+   
   ]
 })
-export class AppModule {}
+export class AppModule { }
