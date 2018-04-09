@@ -24,8 +24,10 @@ import { Facebook } from '@ionic-native/facebook';
 
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginPageModule } from '../pages/login/login.module';
+import { ContatoProvider } from '../providers/contato/contato';
 
 
 
@@ -77,7 +79,8 @@ var config = {
     SplashScreen,
     Facebook,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    Facebook
+    Facebook,
+    ContatoProvider
 
    
   ]
