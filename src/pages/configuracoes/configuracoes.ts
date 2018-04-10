@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PerfilPage } from '../perfil/perfil';
 import { SobrePage } from '../sobre/sobre';
 import { MenuPage } from '../menu/menu';
-import { ContactPage } from '../contact/contact';
+import { ContatosPage } from '../contatos/contatos';
 
 /**
  * Generated class for the ConfiguracoesPage page.
@@ -32,7 +32,9 @@ export class ConfiguracoesPage {
   abrirSobre(){
     this.navCtrl.push(SobrePage);
    }
-   abrirContatos(){
-    this.navCtrl.push(ContactPage);
+  
+  abrirContatos(){
+    this.navCtrl.push(ContatosPage);
    }
+   
 }

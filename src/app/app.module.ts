@@ -4,7 +4,6 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -27,7 +26,10 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginPageModule } from '../pages/login/login.module';
-import { ContatoProvider } from '../providers/contato/contato';
+import { ContactProvider } from '../providers/contact/contact';
+import { ContactEditPageModule } from '../pages/contact-edit/contact-edit.module';
+import { ContatosPageModule } from '../pages/contatos/contatos.module';
+import { ContatosPage } from '../pages/contatos/contatos';
 
 
 
@@ -47,9 +49,9 @@ var config = {
   declarations: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ContatosPage
   ],
   imports: [
     BrowserModule,
@@ -64,15 +66,16 @@ var config = {
     SobrePageModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(config),
-    LoginPageModule
+    LoginPageModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     AboutPage,
-    ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    ContatosPage
   ],
   providers: [
     StatusBar,
@@ -80,7 +83,7 @@ var config = {
     Facebook,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Facebook,
-    ContatoProvider
+    ContactProvider
 
    
   ]

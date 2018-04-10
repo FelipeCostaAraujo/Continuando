@@ -54,7 +54,7 @@ export class LoginPage {
         this.face.profilePicture = objeto_retorno.photoURL;
         this.face.email = objeto_retorno.email;
         this.face.lastSignInTime = objeto_retorno.metadata.lastSignInTime;
-        this.irHome();
+        
         })
         
       })
@@ -68,7 +68,6 @@ export class LoginPage {
           this.face.email = res.user.email;
           this.face.profilePicture = res.user.photoURL;
           this.face.lastSignInTime = res.user.metadata.lastSignInTime;
-          this.irHome();
     })
    
   }
