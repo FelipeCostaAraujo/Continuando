@@ -12,32 +12,57 @@
       <Strong>Felipe Costa araujo</Strong>.....
     </p>
     
-    <ion-list>
-      <ion-item>
-        <ion-label floating>E-Mail</ion-label>
-        <ion-input type="email" [(ngModel)]="loginData.email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Senha</ion-label>
-        <ion-input type="password" [(ngModel)]="loginData.password"></ion-input>
-      </ion-item>
-    </ion-list>
-    <button full ion-button (click)="login()" [disabled]="!loginData.email || !loginData.password">Login</button>
-    <button full ion-button (click)="loginFacebook()">Login com Facebook</button>
+    <form #form="ngForm" novalidate>
+
+
+      <ion-list>
+        <ion-item>
+          <ion-label stacked>E-mail</ion-label>
+          <ion-input type="text" name="email" [(ngModel)]="user.email" #email="ngModel" required></ion-input>
+        </ion-item>
+        <ion-item *ngIf="email.errors && (email.dirty || email.touched)" class="text-danger">
+          O campo é obrigatório
+        </ion-item>
+  
+        <ion-item>
+          <ion-label stacked>Senha</ion-label>
+          <ion-input type="password" name="password" [(ngModel)]="user.password" #password="ngModel" required></ion-input>
+        </ion-item>
+        <ion-item *ngIf="password.errors && (password.dirty || password.touched)" class="text-danger">
+          O campo é obrigatório
+        </ion-item>
+  
+      </ion-list>
+  
+      <button ion-button block color="primary" [disabled]="!form.form.valid" (click)="signIn()">
+        Entrar
+      </button>
+  </form>
+
+
+    <button ion-button block clear (click)="resetPassword()">
+      Esqueci minha senha
+  </button>
     <a href="#" (click)="signup()">Inscreva-se</a>
+<br>
+    <button ion-button round icon-left color="danger" margin-top (click)="signInWithGoogle()">
+      <ion-icon name="logo-google"></ion-icon>
+      Entrar com o Google
+    </button>
+  
+    <button ion-button round icon-left color="facebook" margin-top (click)="loginFacebook()">
+      <ion-icon name="logo-facebook"></ion-icon>
+      Entrar com o Facebook
+    </button>
+  
+    <button ion-button round icon-left color="twitter" margin-top (click)="signInWithTwitter()">
+      <ion-icon name="logo-twitter"></ion-icon>
+      Entrar com o Twitter
+  </button>
 
 
     <br>
     <button ion-button small (click)="irHome()">Ir Para home</button>
-  
-    <p>{{face.name}}</p>
-    <p style="text-align: center">
-        {{ loginData.email }}
-      </p>
-    <img src="{{face.profilePicture}}" />
-    <p>Ultimo login :{{face.lastSignInTime}}</p>
-    
-  
   
   </ion-content>
   

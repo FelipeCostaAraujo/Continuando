@@ -30,9 +30,9 @@ import { ContactProvider } from '../providers/contact/contact';
 import { ContactEditPageModule } from '../pages/contact-edit/contact-edit.module';
 import { ContatosPageModule } from '../pages/contatos/contatos.module';
 import { ContatosPage } from '../pages/contatos/contatos';
-
-
-
+import { AuthProvider } from '../providers/auth/auth';
+import { ResetSenhaPageModule } from '../pages/reset-senha/reset-senha.module';
+import { SignupPageModule } from '../pages/cadastrar/signup.module';
 
 
 var config = {
@@ -67,7 +67,9 @@ var config = {
     AngularFireAuthModule,
     AngularFireModule.initializeApp(config),
     LoginPageModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ResetSenhaPageModule,
+    SignupPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -83,7 +85,8 @@ var config = {
     Facebook,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Facebook,
-    ContactProvider
+    ContactProvider,
+    AuthProvider
 
    
   ]

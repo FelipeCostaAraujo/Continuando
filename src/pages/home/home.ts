@@ -4,6 +4,8 @@ import firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Facebook } from '@ionic-native/facebook';
 import { TabsPage } from '../tabs/tabs';
+import { AuthProvider } from '../../providers/auth/auth';
+import { LoginPage } from '../login/login';
 
 
 @Component({
@@ -32,7 +34,8 @@ export class HomePage {
     private fire: AngularFireAuth,
     public facebook: Facebook,
     private platform: Platform,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private authProvider: AuthProvider
   ) {
 
  
@@ -91,10 +94,6 @@ export class HomePage {
         toast.present();
       });
   }
-  signup() {
-    this.navCtrl.push(HomePage, { email: this.loginData.email });
-  }
-
 
   logout() {
     this.fire.auth.signOut();
@@ -105,67 +104,14 @@ export class HomePage {
     this.navCtrl.push(TabsPage);
    }
 
-}
-/*
-let credential = firebase.auth.FacebookAuthProvider.credential(loginResponse.acessToken);
-firebase.auth().signInWithCredential(credential).then((res)=>{
-
-})
-
- let provider = new firebase.auth.FacebookAuthProvider();
-
-     firebase.auth().signInWithRedirect(provider).then(()=> {
-       firebase.auth().getRedirectResult().then((result)=>{
-         alert(JSON.stringify(result));
-       }).catch(function(error){
-         alert(JSON.stringify(error))
-       });
+   signOut(){
+     this.authProvider.signOut()
+     .then(() =>{
+       this.navCtrl.setRoot(LoginPage);
      })
+     .catch((error) =>{
+       console.error(error);
+     });
+   }
 
-let provider = new firebase.auth.FacebookAuthProvider();
-
-    firebase.auth().signInWithRedirect(provider).then(()=>{
-      firebase.auth().getRedirectResult().then((res)=>{
-        console.log(res);
-        this.face.FaceLogin = true;
-        this.face.name = res.user.displayName;
-        this.face.email = res.user.email;
-        this.face.profilePicture = res.user.photoURL;
-        this.face.lastSignInTime = res.user.metadata.lastSignInTime;
-      }).catch(function(error){
-        alert(JSON.stringify(error))
-      });
-    })
-
-
-
-
-
-
-
-
-
-this.fire.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-      .then(res => {
-        console.log(res);
-        this.face.FaceLogin = true;
-        this.face.name = res.user.displayName;
-        this.face.email = res.user.email;
-        this.face.profilePicture = res.user.photoURL;
-        this.face.lastSignInTime = res.user.metadata.lastSignInTime;
-
-      })
-
-
-
-       this.fire.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-      .then(res => {
-        console.log(res);
-        this.face.FaceLogin = true;
-        this.face.name = res.user.displayName;
-        this.face.email = res.user.email;
-        this.face.profilePicture = res.user.photoURL;
-        this.face.lastSignInTime = res.user.metadata.lastSignInTime;
-        
-      })
- */
+}

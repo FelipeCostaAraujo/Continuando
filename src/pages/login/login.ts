@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component,ViewChild } from '@angular/core';
 import { NavController, ToastController, Platform } from 'ionic-angular';
 import firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Facebook } from '@ionic-native/facebook';
 import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
+import { SignupPage } from '../cadastrar/signup';
+import { User } from '../../providers/auth/user';
+import { NgForm } from '@angular/forms';
+import { AuthProvider } from '../../providers/auth/auth';
 
 
 @Component({
@@ -12,9 +16,8 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  
-  PegaDados = new Array<any>();
-
+  user: User = new User();
+  @ViewChild('form') form: NgForm;
 
   face = {
     FaceLogin: false,
@@ -33,7 +36,8 @@ export class LoginPage {
     private fire: AngularFireAuth,
     public facebook: Facebook,
     private platform: Platform,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private authProvider: AuthProvider
   ) {
 
   }
@@ -75,35 +79,33 @@ export class LoginPage {
 }
 
 
-  //Login com facebook usando firebase 
-  login() {
-    this.fire.auth.signInWithEmailAndPassword(this.loginData.email, this.loginData.password)
-      .then(auth => {
-        // Do custom things with auth
+signIn() {
+  if (this.form.form.valid) {
+    this.authProvider.signIn(this.user)
+      .then(() => {
+        this.navCtrl.push(TabsPage);
       })
-      .catch(err => {
-        // Handle error
-        let toast = this.toastCtrl.create({
-          message: err.message,
-          duration: 1000
-        });
+      .catch((error: any) => {
+        let toast = this.toastCtrl.create({ duration: 3000, position: 'bottom' });
+        if (error.code == 'auth/invalid-email') {
+          toast.setMessage('O e-mail digitado não é valido.');
+        } else if (error.code == 'auth/user-disabled') {
+          toast.setMessage('O usuário está desativado.');
+        } else if (error.code == 'auth/user-not-found') {
+          toast.setMessage('O usuário não foi encontrado.');
+        } else if (error.code == 'auth/wrong-password') {
+          toast.setMessage('A senha digitada não é valida.');
+        }
         toast.present();
       });
   }
+}
   signup() {
-    this.navCtrl.push(HomePage, { email: this.loginData.email });
+    this.navCtrl.push(SignupPage, { email: this.loginData.email });
   }
 
   irHome(){
     this.navCtrl.push(TabsPage);
   }
-
-
-  logout() {
-    this.fire.auth.signOut();
-    this.face.FaceLogin = false;
-  }
-
-
 
 }
