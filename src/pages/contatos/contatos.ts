@@ -23,8 +23,6 @@ export class ContatosPage {
     private toast: ToastController) {
 
     this.contacts = this.provider.getAll();
-
-    alert(this.contacts);
   }
 
   newContact() {

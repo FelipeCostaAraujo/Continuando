@@ -89,9 +89,12 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-firebase" spec="^0.1.25" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
-    <engine name="android" spec="~6.4.0" />
     <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
         <variable name="APP_ID" value="343985256007773" />
         <variable name="APP_NAME" value="continuando" />
+    </plugin>
+    <engine name="android" spec="6.4.0" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.2.3">
+        <variable name="REVERSED_CLIENT_ID" value="35454275956-rumoc22pgh9v6qfr0ts8p9m1g2dspimt.apps.googleusercontent.com" />
     </plugin>
 </widget>

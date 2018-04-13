@@ -11,13 +11,12 @@
     Esse app Esta sendo desenvolvido por ,
     <Strong>Felipe Costa araujo</Strong>.....
   </p>
-  <button full ion-button (click)="loginFacebook()" *ngIf="!FaceLogin">Login com Facebook</button>
   <ion-card *ngIf="FaceLogin">
       
-      <img src="{{face.profilePicture}}"/>
+      <img src="{{face.profilePicture}}" alt="{{face.name}}"/>
       <ion-card-content>
         <ion-card-title>
-            {{ face.name }}
+            Bem Vindo ao meu app  {{ face.name }}
           </ion-card-title>
           <p style="text-align: center">
               {{ face.email }}
@@ -28,7 +27,7 @@
      
     </ion-card>
     
-    <button ion-button round color="danger" (click)="logout()" *ngIf="FaceLogin"> logout</button>
+    
 <button ion-button round color="danger" (click)="signOut()">
   Sair
 </button>

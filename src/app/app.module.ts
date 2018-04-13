@@ -33,9 +33,21 @@ import { ContatosPage } from '../pages/contatos/contatos';
 import { AuthProvider } from '../providers/auth/auth';
 import { ResetSenhaPageModule } from '../pages/reset-senha/reset-senha.module';
 import { SignupPageModule } from '../pages/cadastrar/signup.module';
+import { MenuPage } from '../pages/menu/menu';
+import { FilmeDetalhesPage } from '../pages/filme-detalhes/filme-detalhes';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { ConfiguracoesPage } from '../pages/configuracoes/configuracoes';
+import { SobrePage } from '../pages/sobre/sobre';
+import { ResetSenhaPage } from '../pages/reset-senha/reset-senha';
+import { SignupPage } from '../pages/cadastrar/signup';
+import { LoginPage } from '../pages/login/login';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { FeedPage } from '../pages/feed/feed';
+import { IntroPage } from '../pages/intro/intro';
+import { ChatPage } from '../pages/chat/chat';
 
 
-var config = {
+const config = {
   apiKey: "AIzaSyDMMO5Efv2t6N3U2XC7afgb2UZYZgIeYU0",
   authDomain: "continuandofire.firebaseapp.com",
   databaseURL: "https://continuandofire.firebaseio.com",
@@ -51,25 +63,26 @@ var config = {
     AboutPage,
     HomePage,
     TabsPage,
-    ContatosPage
+    ContatosPage,
+    ConfiguracoesPage,
+    PerfilPage,
+    FilmeDetalhesPage,
+    MenuPage,
+    SobrePage,
+    ResetSenhaPage,
+    SignupPage,
+    LoginPage,
+    FeedPage,
+    IntroPage,
+    ChatPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    FeedPageModule,
-    IntroPageModule,
     HttpModule,
-    ConfiguracoesPageModule,
-    PerfilPageModule,
-    FilmeDetalhesPageModule,
-    MenuPageModule,
-    SobrePageModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(config),
-    LoginPageModule,
-    AngularFireDatabaseModule,
-    ResetSenhaPageModule,
-    SignupPageModule
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -77,7 +90,18 @@ var config = {
     AboutPage,
     HomePage,
     TabsPage,
-    ContatosPage
+    ContatosPage,
+    ConfiguracoesPage,
+    PerfilPage,
+    FilmeDetalhesPage,
+    MenuPage,
+    SobrePage,
+    ResetSenhaPage,
+    SignupPage,
+    LoginPage,
+    FeedPage,
+    IntroPage,
+    ChatPage
   ],
   providers: [
     StatusBar,
@@ -86,7 +110,8 @@ var config = {
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Facebook,
     ContactProvider,
-    AuthProvider
+    AuthProvider,
+    GooglePlus
 
    
   ]

@@ -7,6 +7,7 @@ import { ConfiguracoesPage } from '../configuracoes/configuracoes';
 import { PerfilPage } from '../perfil/perfil';
 import { SobrePage } from '../sobre/sobre';
 import { LoginPage } from '../login/login';
+import { ChatPage } from '../chat/chat';
 
 
 @Component({
@@ -14,12 +15,12 @@ import { LoginPage } from '../login/login';
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab2Root = FeedPage;
-  tab3Root = ConfiguracoesPage;
-  tab4Root = PerfilPage;
-  tab5Root = SobrePage;
-  tab6Root = LoginPage;
+  tab1Root: any = HomePage;
+  tab2Root: any = FeedPage;
+  tab3Root: any = ConfiguracoesPage;
+  tab4Root: any = PerfilPage;
+  tab5Root: any = SobrePage;
+  tab6Root: any = ChatPage;
   
 
   constructor() {

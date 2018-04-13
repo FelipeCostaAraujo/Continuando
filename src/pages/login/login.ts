@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, ToastController, Platform } from 'ionic-angular';
 import firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -9,6 +9,7 @@ import { SignupPage } from '../cadastrar/signup';
 import { User } from '../../providers/auth/user';
 import { NgForm } from '@angular/forms';
 import { AuthProvider } from '../../providers/auth/auth';
+import { ResetSenhaPage } from '../reset-senha/reset-senha';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class LoginPage {
 
   }
 
-  
+  /*metodo um login facebook, não apagar importante e funcionando
   loginFacebook() {
 
     if (this.platform.is('cordova')) {
@@ -77,35 +78,69 @@ export class LoginPage {
   }
   
 }
+*/
 
-
-signIn() {
-  if (this.form.form.valid) {
-    this.authProvider.signIn(this.user)
-      .then(() => {
-        this.navCtrl.push(TabsPage);
-      })
-      .catch((error: any) => {
-        let toast = this.toastCtrl.create({ duration: 3000, position: 'bottom' });
-        if (error.code == 'auth/invalid-email') {
-          toast.setMessage('O e-mail digitado não é valido.');
-        } else if (error.code == 'auth/user-disabled') {
-          toast.setMessage('O usuário está desativado.');
-        } else if (error.code == 'auth/user-not-found') {
-          toast.setMessage('O usuário não foi encontrado.');
-        } else if (error.code == 'auth/wrong-password') {
-          toast.setMessage('A senha digitada não é valida.');
-        }
-        toast.present();
-      });
+  //Login com cadastro no firebase
+  signIn() {
+    if (this.form.form.valid) {
+      this.authProvider.signIn(this.user)
+        .then(() => {
+          this.navCtrl.push(TabsPage);
+        })
+        .catch((error: any) => {
+          let toast = this.toastCtrl.create({ duration: 3000, position: 'bottom' });
+          if (error.code == 'auth/invalid-email') {
+            toast.setMessage('O e-mail digitado não é valido.');
+          } else if (error.code == 'auth/user-disabled') {
+            toast.setMessage('O usuário está desativado.');
+          } else if (error.code == 'auth/user-not-found') {
+            toast.setMessage('O usuário não foi encontrado.');
+          } else if (error.code == 'auth/wrong-password') {
+            toast.setMessage('A senha digitada não é valida.');
+          }
+          toast.present();
+        });
+    }
   }
-}
+
+  //Cadastro
   signup() {
     this.navCtrl.push(SignupPage, { email: this.loginData.email });
   }
 
-  irHome(){
+  //botão para ajudar a debugar
+  irHome() {
     this.navCtrl.push(TabsPage);
   }
 
+  //reset senha do firebase
+  resetPassword() {
+    this.navCtrl.push(ResetSenhaPage);
+  }
+
+
+  LoginComfacebook2() {
+    this.authProvider.LoginComFacebook2()
+      .then(() => {
+        this.navCtrl.setRoot(TabsPage);
+      })
+      .catch((error) => {
+        this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Erro ao efetuar o login' })
+          .present();
+      });
+  }
+  
+  signInWithGoogle() {
+    this.authProvider.signInWithGoogle()
+      .then(() => {
+        this.navCtrl.setRoot(TabsPage);
+      })
+      .catch((error) => {
+        this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Erro ao efetuar o login' })
+          .present();
+      });
+  }
+
 }
+
+

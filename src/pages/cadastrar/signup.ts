@@ -20,6 +20,7 @@ import { LoginPage } from '../login/login';
 export class SignupPage {
   user: User = new User();
   @ViewChild('form') form: NgForm;
+
   constructor(
     public navCtrl: NavController,
     private toastCtrl: ToastController,
@@ -32,12 +33,11 @@ export class SignupPage {
 
       this.authService.createUser(this.user)
         .then((user: any) => {
-          user.sendEmailVerification();
-
+          
           toast.setMessage('Usuário criado com sucesso.');
           toast.present();
 
-          this.navCtrl.setRoot(LoginPage);
+          this.navCtrl.setRoot(TabsPage);
         })
         .catch((error: any) => {
           if (error.code  == 'auth/email-already-in-use') {
